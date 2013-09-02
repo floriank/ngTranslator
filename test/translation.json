@@ -9,7 +9,8 @@
 			"2": "Zwei Benutzer online",
 			"defaultTranslation": "{{ count }} Benutzer online"
 		},
-		"user_count3": "{{ count }} user {{ count }}"
+		"user_count3": "{{ count }} user {{ count }}",
+		"placeholder": "Dein Name"
 	},
 	"en": {
 		"first_paragraph": "First paragraph",
@@ -21,6 +22,7 @@
 			"2": "Two User online",
 			"defaultTranslation": "{{ count }} User online"
 		},
-		"user_count3": "{{ count }} user {{ count }}"
+		"user_count3": "{{ count }} user {{ count }}",
+		"placeholder": "Your name"
 	}
 }

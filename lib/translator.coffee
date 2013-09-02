@@ -8,7 +8,38 @@ do (angular) ->
 			lang = if attrs.translateLang? then attrs.translateLang else null
 			translateProcessor.process key, lang, scope, (content) ->
 				element[0].innerText = content
-			
+				return
+			return
+	])
+	.directive('translateAttribute', ['translateProcessor', (translateProcessor) ->
+		restrict: 'AC'
+		link: (scope, element, attrs) ->
+			[attributeName, key] = attrs.translateAttribute?.split '|'
+			lang = if attrs.translateLang? then attrs.translateLang else null
+			translateProcessor.process key, lang, scope, (content) ->
+				element[0].setAttribute attributeName, content
+				return
+			return
+	])
+	.directive('translatePlaceholder', ['translateProcessor', (translateProcessor) ->
+		restrict: 'AC'
+		link: (scope, element, attrs) ->
+			key = attrs.translatePlaceholder
+			lang = if attrs.translateLang? then attrs.translateLang else null
+			translateProcessor.process key, lang, scope, (content) ->
+				element[0].setAttribute 'placeholder', content
+				return
+			return	
+	])
+	.directive('translateValue', ['translateProcessor', (translateProcessor) ->
+		restrict: 'AC'
+		link: (scope, element, attrs) ->
+			key = attrs.translateValue
+			lang = if attrs.translateLang? then attrs.translateLang else null
+			translateProcessor.process key, lang, scope, (content) ->
+				element[0].setAttribute 'value', content
+				return
+			return
 	])
 	.service('translateProcessor', ['$interpolate', 'translator', 'translateConfig', (interpolate, translator, translateConfig) ->
 		@process = (key, lang, scope, callback) ->
@@ -103,6 +134,7 @@ do (angular) ->
 			return
 		@setDefaultMissingError = (error) ->
 			@defaultMissingError = error
+			return
 		return
 	])
 	.factory('translateData', ['$q', (q) ->
@@ -119,7 +151,7 @@ do (angular) ->
 			done.promise.then (translations) ->
 				translation.reject lang unless lang? and translations[lang]?
 				translation.resolve translations[lang]
+				return
 			translation.promise				
-			
 	])
 	return
