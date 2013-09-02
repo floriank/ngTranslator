@@ -29,7 +29,7 @@ Use it:
 	<p translate translate-lang="en">first_paragraph</p>
 
 	<!-- translate an attribute -->
-	<input type="text" translate-attribute="attributeName|translationKey">
+	<input type="text" translate-attribute="placeholder" placeholder="translationKey">
 
 	<!-- shortcut for placeholder attribute of input -->
 	<input type="text" translate-placeholder="translationKey">
