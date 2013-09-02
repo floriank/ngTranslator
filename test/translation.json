@@ -1,8 +1,24 @@
 {
 	"de": {
-		"first_paragraph": "Erster Absatz"
+		"first_paragraph": "Erster Absatz",
+		"user_count": "{{ count }} Benutzer online",
+		"user_count2": {
+			"":"Kein Benutzer online",
+			"0":"Kein Benutzer online",
+			"1": "Ein Benutzer online",
+			"2": "Zwei Benutzer online",
+			"default": "{{ count }} Benutzer online"
+		}
 	},
 	"en": {
-		"first_paragraph": "First paragraph"
+		"first_paragraph": "First paragraph",
+		"user_count": "{{ count }} User online",
+		"user_count2": {
+			"":"No User online",
+			"0":"No User online",
+			"1": "One User online",
+			"2": "Two User online",
+			"default": "{{ count }} User online"
+		}
 	}
 }
