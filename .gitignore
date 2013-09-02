@@ -2,3 +2,7 @@ translator.sublime-project
 translator.sublime-workspace
 node_modules/
 vendor/
+test/test.js
+test/translator.js
+test/test.js.map
+test/translator.js.map
