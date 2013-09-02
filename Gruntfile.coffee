@@ -6,6 +6,8 @@ module.exports = (grunt) ->
 		pkg: grunt.file.readJSON 'package.json' 
 		coffee:
 			lib:
+				options:
+					bare: yes
 				src: ['./lib/*.coffee']
 				dest: './test/translator.js'
 			test:
