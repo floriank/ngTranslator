@@ -1,11 +1,17 @@
 do (angular) ->
 	"use strict"
 	angular.module('ngTranslator', [])
-	.directive('translate', ['$interpolate', 'translator', 'translateConfig', (interpolate, translator, translateConfig) ->
+	.directive('translate', ['translateProcessor', (translateProcessor) ->
 		restrict: 'AC'
 		link: (scope, element, attrs) ->
 			key = element[0].innerText
 			lang = if attrs.translateLang? then attrs.translateLang else null
+			translateProcessor.process key, lang, scope, (content) ->
+				element[0].innerText = content
+			
+	])
+	.service('translateProcessor', ['$interpolate', 'translator', 'translateConfig', (interpolate, translator, translateConfig) ->
+		@process = (key, lang, scope, callback) ->
 			translator.translate(key, lang).then (translation) ->
 				matchReg = /{{([^}]+)}}/g
 				switch typeof translation
@@ -18,13 +24,13 @@ do (angular) ->
 								interpolateFunction = interpolate(translation.defaultTranslation)
 								watcher = translation.defaultTranslation.match matchReg
 							else
-								element[0].innerText = translateConfig.getDefaultError().replace '@@', key
+								callback translateConfig.getDefaultError().replace '@@', key
 								return
 						else
-							element[0].innerText = translateConfig.getConfigError().replace '@@', key
+							callback translateConfig.getConfigError().replace '@@', key
 							return
 					else
-						element[0].innerText = translateConfig.getConfigError().replace '@@', key
+						callback translateConfig.getConfigError().replace '@@', key
 						return
 
 				if watcher
@@ -36,20 +42,19 @@ do (angular) ->
 									interpolateFunction = interpolate(translation[newVal])
 								else
 									interpolateFunction = interpolate(translation.defaultTranslation)
-							element[0].innerText = interpolateFunction(scope)
+							callback interpolateFunction(scope)
 							return
 						return
-				element[0].innerText = interpolateFunction(scope)
+				callback interpolateFunction(scope)
 				return
 			, (error) ->
-				element[0].innerText = error
+				callback error
 				return
 			return
+		return
 	])
-	#.service(''
-	#)
 	.service('translator', ['$q', 'translateConfig', 'translateData', (q, translateConfig, translateData) ->
-		@translate = (key, lang = null) ->
+		@translate = (key, lang) ->
 			result = q.defer()
 			lang = if lang is null then translateConfig.getLanguage() else lang
 			translateData.getTranslation(lang).then (translation) ->
