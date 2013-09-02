@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>ng-translator</title>
+		<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container" ng-app="TranslateTest">
+			<div class="row">
+				<h1>ng-translator</h1>
+			</div>
+			<div class="row" ng-controller="TestController">
+				<p translate>first_paragraph</p>
+				<p translate data-lang="en">first_paragraph</p>
+				<p translate>second_paragraph</p>
+				<p>&nbsp;</p>
+				<p>
+					<input type="text" ng-model="count" ng-init="count='1'">
+				</p>
+				<p>{{ count }}</p>
+				<p translate>user_count</p>
+				<p translate lang="en">user_count</p>
+				<p translate>user_count2</p>
+				<p translate lang="en">user_count2</p>
+			</div>
+		</div>
+		<script src="/angular.min.js"></script>
+		<script src="/translator.js"></script>
+		<script src="/test.js"></script>
+	</body>
+</html>
