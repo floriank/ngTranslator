@@ -7,9 +7,14 @@
 		<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 	</head>
 	<body>
-		<div class="container">
+		<div class="container" ng-app="TranslateTest">
 			<div class="row">
 				<h1>ng-translator</h1>
+			</div>
+			<div class="row" ng-controller="TestController">
+				<p translate>first_paragraph</p>
+				<p translate data-lang="en">first_paragraph</p>
+				<p translate>second_paragraph</p>
 			</div>
 		</div>
 		<script src="/angular.min.js"></script>
