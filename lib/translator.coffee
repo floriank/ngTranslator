@@ -36,7 +36,8 @@ do (angular) ->
 	.directive('translateAttribute', ['translateProcessor', (translateProcessor) ->
 		restrict: 'AC'
 		link: (scope, element, attrs) ->
-			[attributeName, key] = attrs.translateAttribute?.split '|'
+			attributeName = attrs.translateAttribute
+			key = attrs[attributeName]
 			lang = if attrs.translateLang? then attrs.translateLang else null
 			translateProcessor.process key, lang, scope, (content) ->
 				element[0].setAttribute attributeName, content
