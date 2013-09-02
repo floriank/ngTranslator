@@ -1,4 +1,4 @@
-tasks = ['contrib-coffee', 'contrib-watch', 'devserver']
+tasks = ['contrib-coffee', 'contrib-watch', 'devserver', 'contrib-copy']
 
 module.exports = (grunt) ->
 
@@ -18,6 +18,19 @@ module.exports = (grunt) ->
 			test:
 				files: ['./test/*.coffee']
 				tasks: ['coffee:test']
+		copy:
+			angular:
+				expand: yes
+				cwd: './vendor/angular/'
+				src: 'angular.*'
+				dest: './test/'
+				flatten: yes
+			bootstrap:
+				expand: yes
+				cwd: './vendor/bootstrap/dist/'
+				src: '**'
+				dest: './test/bootstrap'
+
 		devserver:
 			options:
 				base: './test'
