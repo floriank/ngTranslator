@@ -7,20 +7,25 @@ do (angular) ->
 			key = element[0].innerText
 			lang = if attrs.lang? then attrs.lang else null
 			translator.translate(key, lang).then (translation) ->
+				matchReg = /{{.*}}/g
 				switch typeof translation
 					when "string"
 						interpolateFunction = interpolate(translation)
-						watcher = translation.match /{{.*}}/g
+						watcher = translation.match matchReg
 					when "object"
-						if translation.default?
-							interpolateFunction = interpolate(translation.default)
-							watcher = translation.default.match /{{.*}}/g
+						if translation.constructor == Object
+							if translation.defaultTranslation?
+								interpolateFunction = interpolate(translation.defaultTranslation)
+								watcher = translation.defaultTranslation.match matchReg
+							else
+								element[0].innerText = translateConfig.getDefaultError().replace '@@', key
+								return
 						else
-							#TODO: make extra error message for this
-							element[0].innerText = translateConfig.getKeyError().replace '@@', "#{key} configuration"
+							element[0].innerText = translateConfig.getConfigError().replace '@@', key
+							return
 					else
-						#TODO: make extra error message for this
-						element[0].innerText = translateConfig.getKeyError().replace '@@', "#{key} configuration"
+						element[0].innerText = translateConfig.getConfigError().replace '@@', key
+						return
 
 				if watcher
 					expr = watcher[0][2..watcher[0].length-3]
@@ -29,8 +34,9 @@ do (angular) ->
 							if translation[newVal]?
 								interpolateFunction = interpolate(translation[newVal])
 							else
-								interpolateFunction = interpolate(translation.default)
+								interpolateFunction = interpolate(translation.defaultTranslation)
 						element[0].innerText = interpolateFunction(scope)
+						return
 				element[0].innerText = interpolateFunction(scope)
 				return
 			, (error) ->
@@ -54,27 +60,40 @@ do (angular) ->
 	])
 	.provider('translateConfig', [() ->
 		@defaultLanguage = 'en'
-		@languageErrorMessage = 'Not translation for language "@@"'
-		@keyErrorMessage = 'No translation for key "@@"'
+		@languageError = 'Not translation for language "@@"'
+		@keyError = 'No translation for key "@@"'
+		@badConfigError = 'Missconfigured translation for key "@@"'
+		@defaultMissingError = 'No default translation configured for "@@"'
 		@$get = () ->
 			lang = @defaultLanguage
-			langError = @languageErrorMessage
-			keyError = @keyErrorMessage
+			langError = @languageError
+			keyError = @keyError
+			defaultError = @defaultMissingError
+			badConfigError = @badConfigError
 			getLanguage: () ->
 				lang
 			getLangError: () ->
 				langError
 			getKeyError: () ->
 				keyError
+			getDefaultError: () ->
+				defaultError
+			getConfigError: () ->
+				badConfigError
 		@setLanguage = (lang) ->
 			@defaultLanguage = lang
 			return
 		@setLanguageError = (error) ->
-			@languageErrorMessage = error
+			@languageError = error
 			return
 		@setKeyError = (error) ->
-			@keyErrorMessage = error
+			@keyError = error
 			return
+		@setBadConfigError = (error) ->
+			@badConfigError = error
+			return
+		@setDefaultMissingError = (error) ->
+			@defaultMissingError = error
 		return
 	])
 	.factory('translateData', ['$q', (q) ->

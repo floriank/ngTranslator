@@ -10,7 +10,4 @@ app.run ['$http', 'translateData', (http, translateData) ->
 ]
 
 app.controller 'TestController', ['$scope', (scope) ->
-	#scope.$watch 'count', () ->
-	#	counter = parseInt(scope.count)
-
 ]

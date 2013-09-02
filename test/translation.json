@@ -7,7 +7,7 @@
 			"0":"Kein Benutzer online",
 			"1": "Ein Benutzer online",
 			"2": "Zwei Benutzer online",
-			"default": "{{ count }} Benutzer online"
+			"defaultTranslation": "{{ count }} Benutzer online"
 		}
 	},
 	"en": {
@@ -18,7 +18,7 @@
 			"0":"No User online",
 			"1": "One User online",
 			"2": "Two User online",
-			"default": "{{ count }} User online"
+			"defaultTranslation": "{{ count }} User online"
 		}
 	}
 }
