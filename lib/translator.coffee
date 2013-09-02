@@ -7,7 +7,7 @@ do (angular) ->
 			key = element[0].innerText
 			lang = if attrs.lang? then attrs.lang else null
 			translator.translate(key, lang).then (translation) ->
-				matchReg = /{{.*}}/g
+				matchReg = /{{([^}]+)}}/g
 				switch typeof translation
 					when "string"
 						interpolateFunction = interpolate(translation)
@@ -28,15 +28,18 @@ do (angular) ->
 						return
 
 				if watcher
-					expr = watcher[0][2..watcher[0].length-3]
-					scope.$watch expr, (newVal) ->
-						if typeof translation is "object"
-							if translation[newVal]?
-								interpolateFunction = interpolate(translation[newVal])
-							else
-								interpolateFunction = interpolate(translation.defaultTranslation)
-						element[0].innerText = interpolateFunction(scope)
-						return
+					for match in watcher
+						do (match) ->
+							expr = match[2..match.length-3]
+							scope.$watch expr, (newVal) ->
+								if typeof translation is "object"
+									if translation[newVal]?
+										interpolateFunction = interpolate(translation[newVal])
+									else
+										interpolateFunction = interpolate(translation.defaultTranslation)
+								element[0].innerText = interpolateFunction(scope)
+								return
+							return
 				element[0].innerText = interpolateFunction(scope)
 				return
 			, (error) ->
