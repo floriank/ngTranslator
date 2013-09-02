@@ -5,7 +5,7 @@ do (angular) ->
 		restrict: 'AC'
 		link: (scope, element, attrs) ->
 			key = element[0].innerText
-			lang = if attrs.lang? then attrs.lang else null
+			lang = if attrs.translateLang? then attrs.translateLang else null
 			translator.translate(key, lang).then (translation) ->
 				matchReg = /{{([^}]+)}}/g
 				switch typeof translation
@@ -29,17 +29,16 @@ do (angular) ->
 
 				if watcher
 					for match in watcher
-						do (match) ->
-							expr = match[2..match.length-3]
-							scope.$watch expr, (newVal) ->
-								if typeof translation is "object"
-									if translation[newVal]?
-										interpolateFunction = interpolate(translation[newVal])
-									else
-										interpolateFunction = interpolate(translation.defaultTranslation)
-								element[0].innerText = interpolateFunction(scope)
-								return
+						expr = match[2..match.length-3]
+						scope.$watch expr, (newVal) ->
+							if typeof translation is "object"
+								if translation[newVal]?
+									interpolateFunction = interpolate(translation[newVal])
+								else
+									interpolateFunction = interpolate(translation.defaultTranslation)
+							element[0].innerText = interpolateFunction(scope)
 							return
+						return
 				element[0].innerText = interpolateFunction(scope)
 				return
 			, (error) ->
@@ -47,6 +46,8 @@ do (angular) ->
 				return
 			return
 	])
+	#.service(''
+	#)
 	.service('translator', ['$q', 'translateConfig', 'translateData', (q, translateConfig, translateData) ->
 		@translate = (key, lang = null) ->
 			result = q.defer()
