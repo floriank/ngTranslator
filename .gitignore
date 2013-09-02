@@ -6,3 +6,7 @@ test/test.js
 test/translator.js
 test/test.js.map
 test/translator.js.map
+test/bootstrap/
+test/angular.js
+test/angular.min.js
+test/angular.min.js.map
