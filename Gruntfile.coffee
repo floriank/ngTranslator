@@ -1,4 +1,4 @@
-tasks = ['contrib-coffee', 'contrib-watch']
+tasks = ['contrib-coffee', 'contrib-watch', 'devserver']
 
 module.exports = (grunt) ->
 
@@ -18,8 +18,13 @@ module.exports = (grunt) ->
 			test:
 				files: ['./test/*.coffee']
 				tasks: ['coffee:test']
+		devserver:
+			options:
+				base: './test'
+				port: 8000
 
 
 	grunt.loadNpmTasks "grunt-#{task}" for task in tasks
 
 	grunt.registerTask "default", ['coffee:lib', 'coffee:test']
+	grunt.registerTask "server", ['devserver']
