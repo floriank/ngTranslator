@@ -1,2 +1,4 @@
 translator.sublime-project
 translator.sublime-workspace
+node_modules/
+vendor/

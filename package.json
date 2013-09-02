@@ -1,0 +1,24 @@
+{
+  "name": "ng-translator",
+  "version": "0.0.0",
+  "description": "Translations for Angular.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node_modules/bower/bin/bower install"
+  },
+  "keywords": [
+    "angular.js",
+    "translate"
+  ],
+  "dependencies": {
+    "coffee-script": "~1.6.3"
+  },
+  "devDependencies": {
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt": "~0.4.1",
+    "bower": "~1.2.5"
+  },
+  "author": "Philipp Klose <me@thehippo.de>",
+  "license": "MIT"
+}
