@@ -1,0 +1,26 @@
+{
+  "name": "ng-translator",
+  "version": "0.0.0",
+  "authors": [
+    "Philipp Klose <me@thehippo.de>"
+  ],
+  "description": "Translations for Angular.js",
+  "keywords": [
+    "translation",
+    "angular.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.2.0-rc.1"
+  },
+  "devDependencies": {
+    "bootstrap": "3.0.0"
+  }
+}
