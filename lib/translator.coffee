@@ -27,9 +27,15 @@ do (angular) ->
 		restrict: 'AC'
 		link: (scope, element, attrs) ->
 			key = element[0].innerText
+			# Firefox does not support innerText
+			if key is undefined
+				field = "textContent"
+				key   = element[0][field]
+			else
+				field = "innerText"
 			lang = if attrs.translateLang? then attrs.translateLang else null
 			translateProcessor.process key, lang, scope, (content) ->
-				element[0].innerText = content
+				element[0][field] = content
 				return
 			return
 	])
@@ -52,7 +58,7 @@ do (angular) ->
 			translateProcessor.process key, lang, scope, (content) ->
 				element[0].setAttribute 'placeholder', content
 				return
-			return	
+			return
 	])
 	.directive('translateValue', ['translateProcessor', (translateProcessor) ->
 		restrict: 'AC'
@@ -175,6 +181,6 @@ do (angular) ->
 				translation.reject lang unless lang? and translations[lang]?
 				translation.resolve translations[lang]
 				return
-			translation.promise				
+			translation.promise
 	])
 	return
