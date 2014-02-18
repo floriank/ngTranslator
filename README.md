@@ -1,6 +1,6 @@
 # ngTranslator
 
-Translate you [AngularJS](http://angularjs.org/) applications.
+Translate you [AngularJS](http://angularjs.org/) applications. Original module and idea by [Philipp Klose](https://github.com/thehippo).
 
 ## Usage
 
@@ -38,7 +38,7 @@ Use it:
 	<input type="text" translate-value="translationKey">
 
 
-**Notes:** 
+**Notes:**
 
 * If a key or a language are not found an (configurable) error message will be displayed where the translation should be.
 * If translation data is misconfigured for a key and (configurable) error message will be displayed where the translation should be.
