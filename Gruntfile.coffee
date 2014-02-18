@@ -1,9 +1,9 @@
-tasks = ['contrib-coffee', 'contrib-watch', 'devserver', 'contrib-copy']
+tasks = ['contrib-coffee', 'contrib-watch', 'devserver', 'contrib-copy', 'contrib-uglify']
 
 module.exports = (grunt) ->
 
 	grunt.initConfig
-		pkg: grunt.file.readJSON 'package.json' 
+		pkg: grunt.file.readJSON 'package.json'
 		coffee:
 			lib:
 				options:
@@ -37,6 +37,11 @@ module.exports = (grunt) ->
 			options:
 				base: './test'
 				port: 8000
+
+		uglify:
+			compile:
+				files:
+					'./dist/translator.min.js':'./test/translator.js'
 
 
 	grunt.loadNpmTasks "grunt-#{task}" for task in tasks

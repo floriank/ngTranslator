@@ -19,7 +19,8 @@
     "grunt": "~0.4.1",
     "bower": "~1.2.5",
     "grunt-devserver": "~0.4.1",
-    "grunt-contrib-copy": "~0.4.1"
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-uglify": "~0.3.2"
   },
   "author": "Philipp Klose <me@thehippo.de>",
   "license": "MIT"
