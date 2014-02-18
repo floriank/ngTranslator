@@ -10,7 +10,8 @@
 			"defaultTranslation": "{{ count }} Benutzer online"
 		},
 		"user_count3": "{{ count }} user {{ count }}",
-		"placeholder": "Dein Name"
+		"placeholder": "Dein Name",
+		"bar": "Ein Attribut auf basis eines interpolierten Wertes, inklusive Scope Variable: {{ bar }}."
 	},
 	"en": {
 		"first_paragraph": "First paragraph",
@@ -23,6 +24,7 @@
 			"defaultTranslation": "{{ count }} User online"
 		},
 		"user_count3": "{{ count }} user {{ count }}",
-		"placeholder": "Your name"
+		"placeholder": "Your name",
+		"bar": "An attribute based on an interpolated value with a scope variable: {{ bar }}."
 	}
 }

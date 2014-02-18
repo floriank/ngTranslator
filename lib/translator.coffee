@@ -23,7 +23,7 @@ SOFTWARE.
 do (angular) ->
 	"use strict"
 	angular.module('ngTranslator', [])
-	.directive('translate', ['translateProcessor', (translateProcessor) ->
+	.directive('translate', ['translateProcessor', '$interpolate', (translateProcessor, $interpolate) ->
 		restrict: 'AC'
 		link: (scope, element, attrs) ->
 			key = element[0].innerText
@@ -37,6 +37,7 @@ do (angular) ->
 			translateProcessor.process key, lang, scope, (content) ->
 				element[0][field] = content
 				return
+			, attrs.interpolated?
 			return
 	])
 	.directive('translateAttribute', ['translateProcessor', (translateProcessor) ->
@@ -71,7 +72,8 @@ do (angular) ->
 			return
 	])
 	.service('translateProcessor', ['$interpolate', 'translator', 'translateConfig', (interpolate, translator, translateConfig) ->
-		@process = (key, lang, scope, callback) ->
+		@process = (key, lang, scope, callback, interpolated = no) ->
+			key = interpolate(key)(scope) if interpolated
 			translator.translate(key, lang).then (translation) ->
 				matchReg = /{{([^}]+)}}/g
 				switch typeof translation
