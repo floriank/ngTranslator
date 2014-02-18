@@ -1,8 +1,11 @@
 {
   "name": "ng-translator",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "authors": [
     "Philipp Klose <me@thehippo.de>"
+  ],
+  "contributors": [
+    "Florian Kraft <floriankraft@gmx.de>"
   ],
   "description": "Translations for Angular.js",
   "keywords": [
@@ -18,7 +21,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "1.2.0-rc.1"
+    "angular": "~> 1.2.x"
   },
   "devDependencies": {
     "bootstrap": "3.0.0"
