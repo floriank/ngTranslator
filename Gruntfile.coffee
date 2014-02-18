@@ -46,5 +46,5 @@ module.exports = (grunt) ->
 
 	grunt.loadNpmTasks "grunt-#{task}" for task in tasks
 	grunt.registerTask "vendor", ["copy:angular", "copy:bootstrap"]
-	grunt.registerTask "default", ['vendor', 'coffee:lib', 'coffee:test']
+	grunt.registerTask "default", ['vendor', 'coffee:lib', 'coffee:test', 'uglify']
 	grunt.registerTask "server", ['devserver']
