@@ -1,8 +1,11 @@
 {
   "name": "ng-translator",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "authors": [
     "Philipp Klose <me@thehippo.de>"
+  ],
+  "contributors": [
+    "Florian Kraft <floriankraft@gmx.de>"
   ],
   "description": "Translations for Angular.js",
   "keywords": [

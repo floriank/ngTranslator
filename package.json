@@ -1,6 +1,6 @@
 {
   "name": "ng-translator",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Translations for Angular.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -23,5 +23,8 @@
     "grunt-contrib-uglify": "~0.3.2"
   },
   "author": "Philipp Klose <me@thehippo.de>",
+  "contributors": [
+    "Florian Kraft <floriankrfat@gmx.de>"
+  ],
   "license": "MIT"
 }
